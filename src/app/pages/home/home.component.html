@@ -1,0 +1,199 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Resumo de Lançamentos</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row ">
+
+        <!--coluna esquerda----->
+        <div class="col-md-6 ">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <span class="ms-1">Totais</span>
+                    <div class="card mt-2 shadow h-75">
+                        <div class="card-body">
+                            <h5 class="card-title"> <i class="bi bi-dash-circle-fill fs-6 me-3 text-danger"></i>Despesas
+                            </h5>
+                            <h1> - R$2500,00</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <span class="ms-1"></span>
+                    <div class="card mt-2 shadow h-75 ">
+                        <div class="card-body">
+                            <h5 class="card-title"><i
+                                    class="bi bi-plus-circle-fill fs-5 ms-1 me-3 text-primary"></i>Receitas
+                            </h5>
+                            <h1> + R$5500,00</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card mt-2 shadow w-auto" style="height: 422px;">
+                        <div class="card-body">
+                            <h4 class="card-title text-center mt-3">Adicionar Lançamento
+                                <i class="bi bi-plus-square-fill  ms-2  "></i>
+                            </h4>
+
+                            <form class="row g-3 needs-validation" novalidate>
+                                <div class="col-md-6 ">
+                                    <div class="form-check mt-3  d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck"
+                                            required>
+                                        <label class="form-check-label ms-2" for="invalidCheck">
+                                            DESPESA
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check mt-3 ms-5">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck"
+                                            required>
+                                        <label class="form-check-label" for="invalidCheck">
+                                            RECEITA
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="validationCustom01" class="form-label ms-1"> Valor</label>
+                                    <input type="text" class="form-control" id="validationCustom01"
+                                        placeholder="R$ 100,00" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="validationCustom02" class="form-label ms-1">Descrição</label>
+                                    <input type="text" class="form-control" id="validationCustom02"
+                                        placeholder="Ex: Almoço" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="validationCustom04" class="form-label ms-1 mt-3">Categoria</label>
+                                    <select class="form-select" id="validationCustom04" required>
+                                        <option selected disabled value="">Selecione um categoria</option>
+                                        <option>...</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a valid state.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="validationCustom05" class="form-label ms-1 mt-3">Data</label>
+                                    <input type="date" class="form-control" id="validationCustom05" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid zip.
+                                    </div>
+                                </div>
+
+                                <div class="col-12 ">
+                                    <button class="btn btn-dark w-100 mt-4" type="submit">Adicionar</button>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+        <!---------coluna direita--------->
+        <div class="col-md-6 ">
+            <span class="ms-1">Últimos Lançamentos</span>
+            <div class="card mt-2 shadow">
+                <div class="card-body " style="height: 550px">
+                    <table class="table">
+                        <thead>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">- R$50,00</th>
+                                <td>Lanche</td>
+                                <td>25/05</td>
+                                <td>13:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">- R$150,00</th>
+                                <td>Água</td>
+                                <td>02/06</td>
+                                <td>08:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">- R$35,00</th>
+                                <td>Corte de cabelo</td>
+                                <td>28/05</td>
+                                <td>14:30</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">- R$66,00</th>
+                                <td>Combustível</td>
+                                <td>31/05</td>
+                                <td>11:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">- R$03,00</th>
+                                <td>Pix</td>
+                                <td>31/05</td>
+                                <td>09:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">- R$16,00</th>
+                                <td>Cartão</td>
+                                <td>01/06</td>
+                                <td>12:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">- R$1150,00</th>
+                                <td>Aluguel</td>
+                                <td>10/06</td>
+                                <td>10:10</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">- R$950,00</th>
+                                <td>Compra</td>
+                                <td>01/06</td>
+                                <td>19:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">- R$950,00</th>
+                                <td>Açougue</td>
+                                <td>01/06</td>
+                                <td>20:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">- R$50,00</th>
+                                <td>Pastel</td>
+                                <td>01/06</td>
+                                <td>22:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
