@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow h-50" style="width: 30rem;">
+        <div class="card-body">
+            <h2 class="card-title text-center">FinanceiroApp</h2>
+            <hr>
+            <h5 class="card-text text-center">Seja Bem Vindo!</h5>
+
+            <form action="">
+                <h6 for="usuario" class="form-label mt-3 ms-2">Usuário</h6>
+                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="usuario@mail.com"
+                    required>
+
+                <h6 for="senha" class="form-label mt-4 ms-2">Senha</h6>
+                <input type="text" class="form-control" name="senha" id="senha" placeholder="*****" required>
+
+                <button class="btn btn-dark w-100 mt-4 mb-4" type="submit">LOGIN</button>
+
+                <div class="span text-center">
+
+                    <span>Não tem conta? <a [routerLink]="['/pages/register']" routerLinkActive="router-link-active">Cadastre-se agora!</a></span>
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
