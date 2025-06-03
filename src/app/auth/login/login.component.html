@@ -5,15 +5,15 @@
             <hr>
             <h5 class="card-text text-center">Seja Bem Vindo!</h5>
 
-            <form action="">
-                <h6 for="usuario" class="form-label mt-3 ms-2">Usuário</h6>
-                <input type="text" class="form-control" name="usuario" id="usuario" placeholder="usuario@mail.com"
-                    required>
+            <form [formGroup]="form">
+                <h6 for="usuario" class="form-label mt-3 ms-2">E-mail</h6>
+                <input type="text" class="form-control" name="email" id="email"  autocomplete="email"placeholder="usuario@mail.com"
+                     formControlName="email" required>
 
                 <h6 for="senha" class="form-label mt-4 ms-2">Senha</h6>
-                <input type="text" class="form-control" name="senha" id="senha" placeholder="*****" required>
+                <input type="password" class="form-control" name="senha" id="senha" autocomplete="current-password" placeholder="*****"   formControlName="senha" required>
 
-                <button class="btn btn-dark w-100 mt-4 mb-4" type="submit">LOGIN</button>
+                <button class="btn btn-dark w-100 mt-4 mb-4"  (click)="login()">LOGIN</button>
 
                 <div class="span text-center">
 
