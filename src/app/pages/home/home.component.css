@@ -1,0 +1,11 @@
+td{
+    font-size: 18px;
+}
+
+th{
+    font-size: 22px;
+}
+
+.valor {
+    text-align: end;
+}
