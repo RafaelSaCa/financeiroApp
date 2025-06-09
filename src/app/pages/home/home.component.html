@@ -15,114 +15,38 @@
 
         @if ( transacoes) {
 
-        <div class="col-md-6 ">
-            <div class="row">
-                <div class="col-md-6">
-                    <span class="ms-1">Totais</span>
-                    <div class="card mt-2 shadow h-75">
-                        <div class="card-body">
-                            <h5 class="card-title"> <i class="bi bi-dash-circle-fill fs-6 me-3 text-danger"></i>Despesas
-                            </h5>
-                            <h1> - R${{ transacoes.totalDespesas}} </h1>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <span class="ms-1"></span>
-                    <div class="card mt-2 shadow h-75 ">
-                        <div class="card-body">
-                            <h5 class="card-title"><i
-                                    class="bi bi-plus-circle-fill fs-5 ms-1 me-3 text-primary"></i>Receitas
-                            </h5>
-                            <h1> + R${{ transacoes.totalReceitas}}</h1>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="card mt-2 shadow w-auto" style="height: 422px;">
-                        <div class="card-body">
-                            <h4 class="card-title text-center mt-3">Adicionar Lançamento
-                                <i class="bi bi-plus-square-fill  ms-2  "></i>
-                            </h4>
-
-                            <form class="row g-3 needs-validation" novalidate>
-                                <div class="col-md-6 ">
-                                    <div class="form-check mt-3  d-flex justify-content-center">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck"
-                                            required>
-                                        <label class="form-check-label ms-2" for="invalidCheck">
-                                            DESPESA
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-check mt-3 ms-5">
-                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck"
-                                            required>
-                                        <label class="form-check-label" for="invalidCheck">
-                                            RECEITA
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="validationCustom01" class="form-label ms-1"> Valor</label>
-                                    <input type="text" class="form-control" id="validationCustom01"
-                                        placeholder="R$ 100,00" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="validationCustom02" class="form-label ms-1">Descrição</label>
-                                    <input type="text" class="form-control" id="validationCustom02"
-                                        placeholder="Ex: Almoço" required>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="validationCustom04" class="form-label ms-1 mt-3">Categoria</label>
-                                    <select class="form-select" id="validationCustom04" required>
-                                        <option selected disabled value="">Selecione um categoria</option>
-                                        <option>...</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="validationCustom05" class="form-label ms-1 mt-3">Data</label>
-                                    <input type="date" class="form-control" id="validationCustom05" required>
-                                </div>
-
-                                <div class="col-12 ">
-                                    <button class="btn btn-dark w-100 mt-4" type="submit">Adicionar</button>
-                                </div>
-                            </form>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
         <div class="col-md-6 ">
             <span class="ms-1">Últimos Lançamentos</span>
             <div class="card mt-2 shadow">
-                <div class="card-body " style="height: 550px">
+                <div class="card-body " style="height: 538px">
                     <table class="table">
 
                         <thead>
-
+                            <tr>
+                                <th>Data</th>
+                                <th>Categoria</th>
+                                <th>Descricação</th>
+                                <th class="valor">Valor</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let transacao of transacoes.transacoes;">
                                 <td>{{ transacao.dataVencimento| date:'dd/MM' }}</td>
                                 <td>
                                     <ng-container [ngSwitch]="transacao.categoria.descricao.toLowerCase()">
-                                        <span *ngSwitchCase="'alimentação'">🍔</span>
-                                        <span *ngSwitchCase="'cartão de crédito'">💳</span>
-                                        <span *ngSwitchCase="'combustível'">⛽</span>
-                                        <span *ngSwitchCase="'aluguel'">🏠</span>
-                                        <span *ngSwitchCase="'saneamento'">🚰</span>
-                                        <span *ngSwitchCase="'energia'">💡</span>
-                                        <span *ngSwitchDefault>📦</span>
+                                        <span *ngSwitchCase="'alimentação'"><i class="fa-solid fa-utensils"></i></span>
+                                        <span *ngSwitchCase="'cartão de crédito'"><i
+                                                class="fa-solid fa-credit-card"></i></span>
+                                        <span *ngSwitchCase="'combustível'"><i class="fa-solid fa-gas-pump"></i></span>
+                                        <span *ngSwitchCase="'aluguel'"><i class="fa-solid fa-house-user"></i></span>
+                                        <span *ngSwitchCase="'saneamento'"><i
+                                                class="fa-solid fa-faucet-drip"></i></span>
+                                        <span *ngSwitchCase="'energia elétrica'"><i
+                                                class="fa-solid fa-lightbulb"></i></span>
+                                        <span *ngSwitchCase="'recebimento de vendas'"><i
+                                                class="fa-brands fa-pix"></i></span>
+                                        <span *ngSwitchDefault></span>
                                     </ng-container>
                                     {{ transacao.categoria.descricao }}
                                 </td>
@@ -137,6 +61,110 @@
             </div>
 
         </div>
+        <div class="col-md-6 ">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="ms-1">Totais</span>
+                    <div class="card mt-2 shadow h-75 ">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-plus-slash-minus fs-5 ms-1 me-3 "></i>Saldo
+                            </h5>
+                            <h3> {{ transacoes.saldo | currency:('BRL') }}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <span class="ms-1"></span>
+                    <div class="card mt-2 shadow h-75">
+                        <div class="card-body">
+                            <h5 class="card-title"> <i class="bi bi-dash-circle-fill fs-6 me-3 text-danger"></i>Despesas
+                            </h5>
+                            <h3> {{ transacoes.totalDespesas | currency:('BRL') }} </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <span class="ms-1"></span>
+                    <div class="card mt-2 shadow h-75 ">
+                        <div class="card-body">
+                            <h5 class="card-title"><i
+                                    class="bi bi-plus-circle-fill fs-5 ms-1 me-3 text-primary"></i>Receitas
+                            </h5>
+                            <h3> {{ transacoes.totalReceitas | currency:('BRL') }}</h3>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="card mt-2 shadow w-auto" style="height: 422px;">
+                        <div class="card-body">
+                            <h4 class="card-title text-center mt-3">Adicionar Lançamento
+                                <i class="bi bi-plus-square-fill  ms-2  "></i>
+                            </h4>
+
+                            <form [formGroup]="form" class="row g-3 needs-validation">
+                                <div class="col-md-6 ">
+                                    <div class="form-check mt-3  d-flex justify-content-center">
+                                        <input class="form-check-input" type="radio" formControlName="tipo"
+                                            [value]="'DESPESA'" required>
+                                        <label class="form-check-label ms-2" for="invalidCheck">
+                                            DESPESA
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check mt-3 ms-5">
+                                        <input class="form-check-input" type="radio" formControlName="tipo"
+                                            [value]="'RECEITA'" required>
+                                        <label class="form-check-label">
+                                            RECEITA
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label ms-1"> Valor</label>
+                                    <input type="number" class="form-control" placeholder="R$ 100,00"
+                                        formControlName="valor" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label ms-1">Descrição</label>
+                                    <input type="text" class="form-control" placeholder="Ex: Almoço"
+                                        formControlName="descricao" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label ms-1 mt-3">Categoria</label>
+                                    <select class="form-select" formControlName="categoriaId" required>
+
+                                        <option selected disabled value="">Selecione um categoria</option>
+                                        @for (categoria of categorias; track categoria.id) {
+                                        <option value={{categoria.id}}> {{categoria.descricao}} </option>
+                                        }
+
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label ms-1 mt-3">Data</label>
+                                    <input type="date" class="form-control" formControlName="dataVencimento" required>
+                                </div>
+
+                                <div class="col-12 ">
+                                    <button class="btn btn-dark w-100 mt-4" (click)="adicionar()">Adicionar</button>
+                                </div>
+                                <ng-toast [position]="TOAST_POSITIONS.TOP_CENTER" [width]="350"></ng-toast>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         }
     </div>
 
