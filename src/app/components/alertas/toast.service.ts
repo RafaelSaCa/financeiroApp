@@ -8,16 +8,31 @@ export class ToastService {
 
 	constructor(private toast: NgToastService) { }
 
+
 	showSuccess(message: string, title?: string) {
-		this.toast.success(message, title, 3000);
-	}
+		this.toast.success(message,
+			title,
+			2000,
+			false,
+			true
+		)
+	};
 
 	showError(message: string, title?: string) {
-		this.toast.danger(message, title, 5000);
-	}
+		this.toast.danger(message,
+			title,
+			3000,
+			false,
+			true
+		)
+	};
 
 	showWarning(message: string, title?: string) {
-		this.toast.warning(message, title, 4000);
-	}
-
+		this.toast.warning(message,
+			title,
+			3000,
+			false,
+			true
+		)
+	};
 }

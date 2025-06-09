@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { NgToastComponent, TOAST_POSITIONS } from 'ng-angular-popup';
 import { ToastService } from '../../components/alertas/toast.service';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
 	selector: 'app-register',
-	imports: [ReactiveFormsModule, NgToastComponent],
+	imports: [ReactiveFormsModule, NgToastComponent, CommonModule],
 	templateUrl: './register.component.html',
 	styleUrl: './register.component.css'
 })
@@ -37,7 +38,7 @@ export class RegisterComponent implements OnInit {
 		}
 		this.service.register(this.form.value).subscribe({
 			next: (usuario) => {
-				this.toast.showSuccess('Conta criada com sucesso:', 'Deu tudo certo!')
+				this.toast.showSuccess('Conta criada com sucesso!', 'Deu tudo certo!')
 				this.router.navigate(['/auth/login']);
 			},
 			error: (error) => {
