@@ -1,7 +1,6 @@
 td {
-    font-size: 22px;
+    font-size: 20px;
 }
-
 
 
 .valor {
@@ -19,9 +18,23 @@ td {
 }
 
 .descricao {
-    max-width: 150px;
+    max-width: 120px;
     /* ou o valor que couber no seu layout */
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+i{
+    font-size: 14px;
+}
+
+.botao-editar{
+  cursor: pointer;
+  margin-right: 15px;
+  
+}
+
+.botao-remover{
+  cursor: pointer;
+ }

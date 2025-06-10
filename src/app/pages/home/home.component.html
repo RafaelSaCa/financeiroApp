@@ -28,6 +28,7 @@
                                 <th class="categoria">Categoria </th>
                                 <th>Descricação</th>
                                 <th class="valor">Valor</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,6 +57,12 @@
 
                                 <td class="valor"> {{ transacao.tipo === 'RECEITA' ? '+' : '-' }} {{ transacao.valor |
                                     currency: 'BRL' }}
+                                </td>
+
+                                <td>
+                                    <span class="botao-editar" (click)="editar(transacao)"><i class="fa-solid fa-pen-to-square "></i></span>    
+                                    <span class="botao-remover" (click)="remover(transacao)"> <i class="fa-solid fa-trash"></i></span>
+                                   
                                 </td>
                             </tr>
                         </tbody>

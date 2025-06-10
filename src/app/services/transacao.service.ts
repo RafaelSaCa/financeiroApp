@@ -21,7 +21,7 @@ export class TransacaoService {
 		return this.http.post<Transacao>(this.apiUrl, transacao);
 	}
 
-	edit(id: number, transacao: Transacao): Observable<Transacao> {
+	update(id: number, transacao: Transacao): Observable<Transacao> {
 		return this.http.put<Transacao>(`${this.apiUrl}/${id}`, transacao);
 	}
 

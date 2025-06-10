@@ -10,6 +10,7 @@ import { Transacoes } from '../../models/transacoes';
 import { CategoriaService } from '../../services/categoria.service';
 import { TransacaoService } from '../../services/transacao.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Transacao } from '../../models/transacao';
 
 @Component({
 	selector: 'app-home',
@@ -18,6 +19,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 	styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
+
 	loading = true;
 	TOAST_POSITIONS = TOAST_POSITIONS;
 
@@ -27,6 +29,8 @@ export class HomeComponent implements OnInit {
 
 	currentPage: number = 1;
 	itemsPerPage: number = 11;
+
+	idEditar: number | null = null;
 
 	constructor(private fb: FormBuilder,
 		private serviceTransacao: TransacaoService,
@@ -50,25 +54,68 @@ export class HomeComponent implements OnInit {
 
 
 	adicionar() {
-		if (this.form.invalid) {
-			this.toast.showWarning('Todos os campos devem sem preenchidos!', 'Ops! Algo deu errado!');
-			console.log(this.form.value);
-			return;
-		}
+		if (this.idEditar) {
+			this.serviceTransacao.update(this.idEditar, this.form.value).subscribe({
+				next: () => {
+					this.toast.showSuccess('Lançamento atuaalizado com sucesso!', 'Deu tudo certo!');
+					this.idEditar = null;
+					this.form.reset();
+					this.listar();
+				},
+				error: () => {
+					this.toast.showError('Verifique os dados. Todos campos devem ser preenchidos!', 'Ops! Algo deu errado!');
+				}
+			});
 
-		this.serviceTransacao.create(this.form.value).subscribe({
-			next: (transacao) => {
+		} else {
+
+
+			if (this.form.invalid) {
+				this.toast.showWarning('Todos os campos devem sem preenchidos!', 'Ops! Algo deu errado!');
 				console.log(this.form.value);
-				this.toast.showSuccess('Lançamento adicionado com sucesso!', 'Deu tudo certo!');
-				this.listar();
-				this.form.reset();
+				return;
+			}
 
+			this.serviceTransacao.create(this.form.value).subscribe({
+				next: (transacao) => {
+					console.log(this.form.value);
+					this.toast.showSuccess('Lançamento adicionado com sucesso!', 'Deu tudo certo!');
+					this.listar();
+					this.form.reset();
+
+				},
+				error: (error) => {
+					this.toast.showError('Ocorreu algum erro. Tente mais tarde!', 'Ops! Algo deu errado!');
+				}
+			});
+		}
+	}
+
+
+	editar(transacao: Transacao) {
+		this.form.patchValue({
+			tipo: transacao.tipo,
+			valor: transacao.valor,
+			descricao: transacao.descricao,
+			categoriaId: transacao.categoria.id,
+			dataVencimento: transacao.dataVencimento
+		});
+
+		this.idEditar = transacao.id;
+	}
+
+
+
+	remover(transacao: Transacao) {
+		this.serviceTransacao.delete(transacao.id).subscribe({
+			next: () => {
+				this.toast.showSuccess('Lançamento removido com sucesso!', 'Deu tudo certo!');
+				this.listar();
 			},
 			error: (error) => {
 				this.toast.showError('Ocorreu algum erro. Tente mais tarde!', 'Ops! Algo deu errado!');
 			}
 		});
-
 	}
 
 
