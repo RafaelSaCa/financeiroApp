@@ -1,11 +1,27 @@
-td{
-    font-size: 18px;
-}
-
-th{
+td {
     font-size: 22px;
 }
 
+
+
 .valor {
     text-align: end;
+}
+
+.categoria {
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+
+}
+
+.descricao {
+    max-width: 150px;
+    /* ou o valor que couber no seu layout */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

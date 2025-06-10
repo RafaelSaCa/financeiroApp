@@ -9,20 +9,24 @@ import { Categoria } from '../../models/categoria';
 import { Transacoes } from '../../models/transacoes';
 import { CategoriaService } from '../../services/categoria.service';
 import { TransacaoService } from '../../services/transacao.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
 	selector: 'app-home',
-	imports: [ReactiveFormsModule, NgToastComponent, NavbarComponent, CommonModule, LoadingComponent],
+	imports: [ReactiveFormsModule, NgToastComponent, NgxPaginationModule, NavbarComponent, CommonModule, LoadingComponent],
 	templateUrl: './home.component.html',
 	styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
 	loading = true;
 	TOAST_POSITIONS = TOAST_POSITIONS;
-	form!: FormGroup;
 
+	form!: FormGroup;
 	transacoes!: Transacoes;
 	categorias!: Categoria[];
+
+	currentPage: number = 1;
+	itemsPerPage: number = 11;
 
 	constructor(private fb: FormBuilder,
 		private serviceTransacao: TransacaoService,
@@ -58,7 +62,7 @@ export class HomeComponent implements OnInit {
 				this.toast.showSuccess('Lançamento adicionado com sucesso!', 'Deu tudo certo!');
 				this.listar();
 				this.form.reset();
-			
+
 			},
 			error: (error) => {
 				this.toast.showError('Ocorreu algum erro. Tente mais tarde!', 'Ops! Algo deu errado!');
@@ -72,7 +76,7 @@ export class HomeComponent implements OnInit {
 	listar() {
 		this.serviceTransacao.getAll().subscribe(resposta => {
 			this.transacoes = resposta;
-			console.log(resposta);
+			this.transacoes.transacoes = this.transacoes.transacoes.reverse();//o ultimo elemento adicionado é o primeiro exibido na lista
 		},
 			error => {
 				this.toast.showError('Ocorreu algum erro ao tentar buscar as transações!', 'Ops!')

@@ -19,21 +19,23 @@
         <div class="col-md-6 ">
             <span class="ms-1">Últimos Lançamentos</span>
             <div class="card mt-2 shadow">
-                <div class="card-body " style="height: 538px">
+                <div class="card-body " style="height: 650px">
                     <table class="table">
 
                         <thead>
                             <tr>
                                 <th>Data</th>
-                                <th>Categoria</th>
+                                <th class="categoria">Categoria </th>
                                 <th>Descricação</th>
                                 <th class="valor">Valor</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let transacao of transacoes.transacoes;">
+                            <tr
+                                *ngFor="let transacao of transacoes.transacoes | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
                                 <td>{{ transacao.dataVencimento| date:'dd/MM' }}</td>
-                                <td>
+
+                                <td class="categoria">
                                     <ng-container [ngSwitch]="transacao.categoria.descricao.toLowerCase()">
                                         <span *ngSwitchCase="'alimentação'"><i class="fa-solid fa-utensils"></i></span>
                                         <span *ngSwitchCase="'cartão de crédito'"><i
@@ -48,16 +50,21 @@
                                                 class="fa-brands fa-pix"></i></span>
                                         <span *ngSwitchDefault></span>
                                     </ng-container>
-                                    {{ transacao.categoria.descricao }}
+
                                 </td>
-                                <td>{{ transacao.descricao }}</td>
-                                <th class="valor"> {{ transacao.tipo === 'RECEITA' ? '+' : '-' }} {{ transacao.valor |
+                                <td class="descricao">{{ transacao.descricao }}</td>
+
+                                <td class="valor"> {{ transacao.tipo === 'RECEITA' ? '+' : '-' }} {{ transacao.valor |
                                     currency: 'BRL' }}
-                                </th>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="currentPage = $event"
+                    class="pagination"></pagination-controls>
+
             </div>
 
         </div>
@@ -96,6 +103,7 @@
                         </div>
                     </div>
                 </div>
+
 
 
                 <div class="col-md-12">

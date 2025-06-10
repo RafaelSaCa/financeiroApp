@@ -8,6 +8,7 @@ import { routes } from './app.routes';
 import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
 import { provideNgToast } from 'ng-angular-popup';
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -23,8 +24,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAnimations(),
     provideNgToast(),
-
-
   ]
 };
 
