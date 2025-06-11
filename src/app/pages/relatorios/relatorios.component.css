@@ -1,0 +1,24 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+
+}
+
+th{
+    font-size: 18px;
+}
+
+td{
+    font-size: 18px;
+}
+
+.categoria{
+    width: 280px;
+}
+
+.descricao{
+    text-align: start;
+}
+.valor{
+    text-align: end;
+}

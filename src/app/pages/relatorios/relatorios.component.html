@@ -1,0 +1,151 @@
+<app-navbar></app-navbar>
+@if (loading) {
+<app-loading></app-loading>
+}
+
+@if ( transacoes){
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Relatório de Lançamentos</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+
+        <h5 class="ms-1">Selecione o filtro para buscar seus lançamentos</h5>
+        <div class="col-md-2">
+            <h6 class="form-label ms-1 mt-3">Tipo</h6>
+            <select class="form-select" formControlName="categoriaId" required>
+
+                <option selected disabled value="">Selecione o tipo</option>
+                <option value="RECEITA">Receita</option>
+                <option value="DESPESA">Despesa</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <h6 class="form-label ms-1 mt-3">Categoria</h6>
+            <select class="form-select" formControlName="categoriaId" required>
+
+                <option selected disabled value="">Selecione um categoria</option>
+                @for (categoria of categorias; track categoria.id) {
+                <option value={{categoria.id}}> {{categoria.descricao}} </option>
+                }
+
+            </select>
+        </div>
+
+        <div class="col-md-6 ">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-plus-slash-minus fs-5 ms-1 me-3 "></i>Saldo
+                            </h5>
+                            <h3> {{ transacoes.saldo | currency:('BRL') }}</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card shadow ">
+                        <div class="card-body">
+                            <h5 class="card-title"> <i class="bi bi-dash-circle-fill fs-6 me-3 text-danger"></i>Despesas
+                            </h5>
+                            <h3> {{ transacoes.totalDespesas | currency:('BRL') }} </h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title"><i
+                                    class="bi bi-plus-circle-fill fs-5 ms-1 me-3 text-primary"></i>Receitas
+                            </h5>
+                            <h3> {{ transacoes.totalReceitas | currency:('BRL') }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+        </div>
+        <div class="card shadow">
+            <div class="card-body " style="height: 500px">
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Data</th>
+                            <th> Tipo </th>
+                            <th class="categoria">Categoria </th>
+                            <th class="descricao">Descrição</th>
+                            <th class="valor">Valor</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let transacao of transacoes.transacoes | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+                            <th></th>
+                            <td>{{ transacao.dataVencimento| date:'dd-MM-YYYY' }}</td>
+
+                            <td>{{transacao.tipo }} </td>
+
+                            <td class="categoria">
+                                <ng-container [ngSwitch]="transacao.categoria.descricao.toLowerCase()">
+                                    <span *ngSwitchCase="'alimentação'"><i class="fa-solid fa-utensils"></i></span>
+                                    <span *ngSwitchCase="'cartão de crédito'"><i
+                                            class="fa-solid fa-credit-card"></i></span>
+                                    <span *ngSwitchCase="'combustível'"><i class="fa-solid fa-gas-pump"></i></span>
+                                    <span *ngSwitchCase="'aluguel'"><i class="fa-solid fa-house-user"></i></span>
+                                    <span *ngSwitchCase="'saneamento'"><i class="fa-solid fa-faucet-drip"></i></span>
+                                    <span *ngSwitchCase="'energia elétrica'"><i
+                                            class="fa-solid fa-lightbulb"></i></span>
+                                    <span *ngSwitchCase="'recebimento de vendas'"><i
+                                            class="fa-brands fa-pix"></i></span>
+                                    <span *ngSwitchDefault></span>
+                                </ng-container>
+                                {{ transacao.categoria.descricao}}
+                            </td>
+                            <td class="descricao">{{ transacao.descricao }}</td>
+
+                            <td class="valor"> {{ transacao.tipo === 'RECEITA' ? '+' : '-' }} {{ transacao.valor |
+                                currency: 'BRL' }}
+                            </td>
+
+                            <td>
+                                <!-- <span class="botao-editar" (click)="editar(transacao)"><i
+                                        class="fa-solid fa-pen-to-square "></i></span>
+                                <span class="botao-remover" (click)="remover(transacao)"> <i
+                                        class="fa-solid fa-trash"></i></span> -->
+
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="currentPage = $event"
+                class="pagination"></pagination-controls>
+
+        </div>
+
+    </div>
+
+</div>
+}
