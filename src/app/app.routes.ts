@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './auth/guard/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
+import { RelatoriosComponent } from './pages/relatorios/relatorios.component';
 
 export const routes: Routes = [
     {
@@ -13,7 +14,13 @@ export const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent,
-             canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
+    },
+
+    {
+        path: 'relatorios',
+        component: RelatoriosComponent,
+        canActivate: [AuthGuard]
     }
 
 
