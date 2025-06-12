@@ -8,40 +8,50 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
-            <h1>Relatório de Lançamentos</h1>
+            <h2>Relatório de Lançamentos</h2>
             <hr>
         </div>
     </div>
     <div class="row">
+        <!---filtro----->
+        <div class="col-md-6">
 
-        <h5 class="ms-1">Selecione o filtro para buscar seus lançamentos</h5>
-        <div class="col-md-2">
-            <h6 class="form-label ms-1 mt-3">Tipo</h6>
-            <select class="form-select" formControlName="categoriaId" required>
+            <form [formGroup]="form" class="row align-items-end">
+                <h5 class="ms-1">Selecione o filtro para buscar seus lançamentos</h5>
 
-                <option selected disabled value="">Selecione o tipo</option>
-                <option value="RECEITA">Receita</option>
-                <option value="DESPESA">Despesa</option>
-            </select>
+                <div class="col-md-6">
+                    <h6 for="tipo" class="form-label ms-1 mt-3">Tipo</h6>
+                    <select id="tipo" class="form-select" formControlName="tipo" required>
+                        <option selected disabled value="">Selecione o tipo</option>
+                        <option value="RECEITA">Receita</option>
+                        <option value="DESPESA">Despesa</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 ">
+                    <h6 for="categoriaId" class="form-label ms-1 mt-3">Categoria</h6>
+                    <select id="categoriaId" class="form-select" formControlName="categoriaId" required>
+                        <option selected disabled value="">Selecione uma categoria</option>
+                        <option *ngFor="let categoria of categorias" [value]="categoria.id">
+                            {{ categoria.descricao }}
+                        </option>
+                    </select>
+                </div>
+
+            </form>
+
+            <div class="col-md-12">
+                <button (click)="buscarLancamentos()" type="submit" class="btn btn-dark mt-3 w-100">Buscar</button>
+            </div>
+
         </div>
 
-        <div class="col-md-4">
-            <h6 class="form-label ms-1 mt-3">Categoria</h6>
-            <select class="form-select" formControlName="categoriaId" required>
-
-                <option selected disabled value="">Selecione um categoria</option>
-                @for (categoria of categorias; track categoria.id) {
-                <option value={{categoria.id}}> {{categoria.descricao}} </option>
-                }
-
-            </select>
-        </div>
-
+        <!--cards------>
         <div class="col-md-6 ">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card shadow">
-                        <div class="card-body">
+                    <div class="card shadow valores ">
+                        <div class="card-body align-content-center">
                             <h5 class="card-title"><i class="bi bi-plus-slash-minus fs-5 ms-1 me-3 "></i>Saldo
                             </h5>
                             <h3> {{ transacoes.saldo | currency:('BRL') }}</h3>
@@ -50,8 +60,8 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card shadow ">
-                        <div class="card-body">
+                    <div class="card shadow valores ">
+                        <div class="card-body align-content-center">
                             <h5 class="card-title"> <i class="bi bi-dash-circle-fill fs-6 me-3 text-danger"></i>Despesas
                             </h5>
                             <h3> {{ transacoes.totalDespesas | currency:('BRL') }} </h3>
@@ -60,20 +70,22 @@
                 </div>
 
                 <div class="col-md-4">
-
-                    <div class="card shadow">
-                        <div class="card-body">
+                    <div class="card shadow valores">
+                        <div class="card-body align-content-center">
                             <h5 class="card-title"><i
-                                    class="bi bi-plus-circle-fill fs-5 ms-1 me-3 text-primary"></i>Receitas
+                                    class="bi bi-plus-circle-fill fs-5 ms-1 me-3 text-primary "></i>Receitas
                             </h5>
                             <h3> {{ transacoes.totalReceitas | currency:('BRL') }}</h3>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
     </div>
+
+    <!---tabela---->
 
     <div class="row">
         <div class="col-md-12">
@@ -146,6 +158,6 @@
         </div>
 
     </div>
-
 </div>
+
 }
