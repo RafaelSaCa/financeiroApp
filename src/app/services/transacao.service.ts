@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transacoes } from '../models/transacoes';
@@ -16,6 +16,12 @@ export class TransacaoService {
 	getAll(): Observable<Transacoes> {
 		return this.http.get<Transacoes>(this.apiUrl);
 	}
+
+	findByFilter(tipo: string, categoriaId: number) {
+		const params = new HttpParams().set('tipo', tipo).set('categoriaId', categoriaId);
+		return this.http.get<Transacoes>(`${this.apiUrl}`, { params });
+	}
+
 
 	create(transacao: Transacao): Observable<Transacao> {
 		return this.http.post<Transacao>(this.apiUrl, transacao);
