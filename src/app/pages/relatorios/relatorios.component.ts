@@ -8,15 +8,18 @@ import { Categoria } from '../../models/categoria';
 import { ToastService } from '../../components/alertas/toast.service';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-relatorios',
-    imports: [NavbarComponent, LoadingComponent,NgxPaginationModule, CommonModule],
+    imports: [NavbarComponent, ReactiveFormsModule, LoadingComponent, NgxPaginationModule, CommonModule],
     templateUrl: './relatorios.component.html',
     styleUrl: './relatorios.component.css'
 })
 export class RelatoriosComponent implements OnInit {
     loading = true;
+
+    form!: FormGroup;
 
     transacoes!: Transacoes;
     categorias!: Categoria[];
@@ -26,14 +29,49 @@ export class RelatoriosComponent implements OnInit {
 
     constructor(private serviceTransacao: TransacaoService,
         private serviceCategoria: CategoriaService,
+        private fb: FormBuilder,
         private toast: ToastService) { }
 
 
     ngOnInit(): void {
+        this.form = this.fb.group({
+            tipo: ['', Validators.required],
+            categoriaId: ['', Validators.required]
+        });
+
+
+
         this.setTimeoutLoading();
         this.listar();
         this.listarCategorias();
+
+
     }
+
+    buscarLancamentos() {
+        const tipoSelecionado = this.form.get('tipo')?.value;
+        const categoriaId = this.form.get('categoriaId')?.value;
+
+        if (!tipoSelecionado) {
+            this.toast.showWarning('Selecione um tipo de movimento!', 'Ops!');
+        }
+
+        return this.serviceTransacao.findByFilter(tipoSelecionado, categoriaId).subscribe({
+            next: (resposta) => {
+                this.transacoes = resposta;
+
+                // Resetar os selects após buscar
+                this.form.patchValue({
+                    tipo: '',
+                    categoriaId: ''
+                });
+            },
+            error: (erro) => {
+                this.toast.showError('Ocorreu algum erro ao tentar buscar as transações por este tipo!', 'Ops!')
+            }
+        });
+    }
+
 
     listar() {
         this.serviceTransacao.getAll().subscribe(resposta => {
