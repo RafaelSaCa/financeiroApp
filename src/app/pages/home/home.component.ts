@@ -59,7 +59,10 @@ export class HomeComponent implements OnInit {
 				next: () => {
 					this.toast.showSuccess('Lançamento atuaalizado com sucesso!', 'Deu tudo certo!');
 					this.idEditar = null;
-					this.form.reset();
+					this.form.reset({
+						categoriaId: ''
+					});
+
 					this.listar();
 				},
 				error: () => {
@@ -81,7 +84,10 @@ export class HomeComponent implements OnInit {
 					console.log(this.form.value);
 					this.toast.showSuccess('Lançamento adicionado com sucesso!', 'Deu tudo certo!');
 					this.listar();
-					this.form.reset();
+					this.form.reset({
+						categoriaId: ''
+					});
+
 
 				},
 				error: (error) => {
