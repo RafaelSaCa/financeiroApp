@@ -154,14 +154,22 @@
 
                                 <div class="col-md-6">
                                     <label class="form-label ms-1 mt-3">Categoria</label>
+
                                     <select class="form-select" formControlName="categoriaId" required>
 
                                         <option selected disabled value="">Selecione um categoria</option>
                                         @for (categoria of categorias; track categoria.id) {
                                         <option value={{categoria.id}}> {{categoria.descricao}} </option>
                                         }
-
                                     </select>
+                                    <div class=" mt-2 justify-content-center">
+                                       
+                                            <h6> <span (click)="exibirCadastroCategoria = !exibirCadastroCategoria">
+                                            <i class="bi bi-plus-circle-fill fs-5  ms-1 text-primary"></i> </span> Nova categoria</h6>
+                                       
+                                    </div>
+
+
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label ms-1 mt-3">Data</label>
@@ -169,13 +177,30 @@
                                 </div>
 
                                 <div class="col-12 ">
-                                    <button class="btn btn-dark w-100 mt-4" (click)="adicionar()">Adicionar</button>
+                                    <button class="btn btn-dark w-100 mt-2" (click)="adicionar()">Adicionar</button>
                                 </div>
                                 <ng-toast [position]="TOAST_POSITIONS.TOP_CENTER" [width]="350"></ng-toast>
                             </form>
 
                         </div>
                     </div>
+
+                    <!--- form cadastro categoria-->
+                    <div *ngIf="exibirCadastroCategoria" class="card mt-3 p-3">
+                        <h5>Nova Categoria</h5>
+                        <div class="mb-2">
+                            <input type="text" class="form-control" placeholder="Descrição" [(ngModel)]="novaCategoria">
+                        </div>
+                        <div class="botoes text-center">
+                            <button type="button" class="btn btn-dark btn-sm w-25"
+                                (click)="salvarNovaCategoria()">Salvar
+                            </button>
+                            <button type="button" class="btn btn-light btn-sm ms-2 w-25"
+                                (click)="exibirCadastroCategoria = false">Cancelar</button>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>

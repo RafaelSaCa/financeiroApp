@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgToastComponent, TOAST_POSITIONS } from 'ng-angular-popup';
 import { ToastService } from '../../components/alertas/toast.service';
 import { LoadingComponent } from '../../components/loading/loading/loading.component';
@@ -14,7 +14,7 @@ import { Transacao } from '../../models/transacao';
 
 @Component({
 	selector: 'app-home',
-	imports: [ReactiveFormsModule, NgToastComponent, NgxPaginationModule, NavbarComponent, CommonModule, LoadingComponent],
+	imports: [ReactiveFormsModule, FormsModule,NgToastComponent, NgxPaginationModule, NavbarComponent, CommonModule, LoadingComponent],
 	templateUrl: './home.component.html',
 	styleUrl: './home.component.css'
 })
@@ -31,6 +31,9 @@ export class HomeComponent implements OnInit {
 	itemsPerPage: number = 11;
 
 	idEditar: number | null = null;
+
+	exibirCadastroCategoria = false;
+	novaCategoria = '';
 
 	constructor(private fb: FormBuilder,
 		private serviceTransacao: TransacaoService,
@@ -124,6 +127,29 @@ export class HomeComponent implements OnInit {
 		});
 	}
 
+	salvarNovaCategoria() {
+		if (!this.novaCategoria.trim()) {
+			this.toast.showWarning('Informe uma descrição para a categoria!', 'Atenção!');
+			return
+		}
+
+		const categoria = {
+			descricao: this.novaCategoria
+		};
+
+		this.serviceCategoria.create(categoria).subscribe({
+			next: (categiaSalva) => {
+				this.categorias.push(categiaSalva);
+				this.toast.showSuccess('Categoria cadastrada com sucesso!', 'Deu tudo certo!');
+				this.exibirCadastroCategoria = false;
+				this.novaCategoria = '';
+			},
+			error: () => {
+				this.toast.showError('Ocorreu algum erro. Tente mais tarde!', 'Ops! Algo deu errado!');
+			}
+		});
+
+	}
 
 
 	listar() {
