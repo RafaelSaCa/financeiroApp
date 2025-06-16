@@ -1,0 +1,74 @@
+<app-navbar></app-navbar>
+@if (loading) {
+<app-loading></app-loading>
+}
+<ng-toast [position]="TOAST_POSITIONS.TOP_CENTER" [width]="350"></ng-toast>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Gerenciamento de Categorias</h2>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+
+        @if ( categorias) {
+
+
+        <div class="col-md-6  ">
+            <h5 class="ms-2">Resumo de categorias</h5>
+            <div class="card mt-2 shadow">
+                <div class="card-body ">
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th class="text-center">editar</th>
+                                <th class="text-center">remover</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr
+                                *ngFor="let categoria of categorias | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+                                <td>{{ categoria.descricao }}</td>
+                                <td class="text-center">
+                                    <span class="botao-editar" (click)="editar(categoria)"><i
+                                            class="fa-solid fa-pen-to-square "></i></span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="botao-remover" (click)="remover(categoria.id)"> <i
+                                            class="fa-solid fa-trash"></i></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="currentPage = $event"
+                    class="pagination"></pagination-controls>
+            </div>
+
+
+
+
+        </div>
+        <div class="col-md-4 ">
+            <h5 class="ms-2">Nova categoria</h5>
+            <div class="card mt-2 shadow">
+                <div class="card-body mt-3 ">
+                    <form [formGroup]="form">
+                        <h6 class="ms-2 " for="descricao">Descrição</h6>
+                        <input type="text" placeholder="ex. lazer" class="form-control" formControlName="descricao"
+                            required>
+                        <button class="btn btn-dark w-100 mt-4 mb-4" (click)="adicionar()">Adicionar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        }
+    </div>
+
+</div>
