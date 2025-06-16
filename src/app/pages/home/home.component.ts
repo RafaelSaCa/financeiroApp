@@ -14,7 +14,7 @@ import { Transacao } from '../../models/transacao';
 
 @Component({
 	selector: 'app-home',
-	imports: [ReactiveFormsModule, FormsModule,NgToastComponent, NgxPaginationModule, NavbarComponent, CommonModule, LoadingComponent],
+	imports: [ReactiveFormsModule, FormsModule, NgToastComponent, NgxPaginationModule, NavbarComponent, CommonModule, LoadingComponent],
 	templateUrl: './home.component.html',
 	styleUrl: './home.component.css'
 })
@@ -31,9 +31,6 @@ export class HomeComponent implements OnInit {
 	itemsPerPage: number = 11;
 
 	idEditar: number | null = null;
-
-	exibirCadastroCategoria = false;
-	novaCategoria = '';
 
 	constructor(private fb: FormBuilder,
 		private serviceTransacao: TransacaoService,
@@ -60,12 +57,8 @@ export class HomeComponent implements OnInit {
 		if (this.idEditar) {
 			this.serviceTransacao.update(this.idEditar, this.form.value).subscribe({
 				next: () => {
-					this.toast.showSuccess('Lançamento atuaalizado com sucesso!', 'Deu tudo certo!');
+					this.toast.showSuccess('Lançamento atualizado com sucesso!', 'Deu tudo certo!');
 					this.idEditar = null;
-					this.form.reset({
-						categoriaId: ''
-					});
-
 					this.listar();
 				},
 				error: () => {
@@ -78,20 +71,13 @@ export class HomeComponent implements OnInit {
 
 			if (this.form.invalid) {
 				this.toast.showWarning('Todos os campos devem sem preenchidos!', 'Ops! Algo deu errado!');
-				console.log(this.form.value);
 				return;
 			}
 
 			this.serviceTransacao.create(this.form.value).subscribe({
 				next: (transacao) => {
-					console.log(this.form.value);
 					this.toast.showSuccess('Lançamento adicionado com sucesso!', 'Deu tudo certo!');
 					this.listar();
-					this.form.reset({
-						categoriaId: ''
-					});
-
-
 				},
 				error: (error) => {
 					this.toast.showError('Ocorreu algum erro. Tente mais tarde!', 'Ops! Algo deu errado!');
@@ -127,29 +113,8 @@ export class HomeComponent implements OnInit {
 		});
 	}
 
-	salvarNovaCategoria() {
-		if (!this.novaCategoria.trim()) {
-			this.toast.showWarning('Informe uma descrição para a categoria!', 'Atenção!');
-			return
-		}
 
-		const categoria = {
-			descricao: this.novaCategoria
-		};
 
-		this.serviceCategoria.create(categoria).subscribe({
-			next: (categiaSalva) => {
-				this.categorias.push(categiaSalva);
-				this.toast.showSuccess('Categoria cadastrada com sucesso!', 'Deu tudo certo!');
-				this.exibirCadastroCategoria = false;
-				this.novaCategoria = '';
-			},
-			error: () => {
-				this.toast.showError('Ocorreu algum erro. Tente mais tarde!', 'Ops! Algo deu errado!');
-			}
-		});
-
-	}
 
 
 	listar() {
