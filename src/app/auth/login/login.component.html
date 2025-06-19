@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-4 shadow h-50" style="width: 30rem;">
+    <div class="card p-4 shadow " style="width: 30rem;">
         <div class="card-body">
             <h2 class="card-title text-center">FinanceiroApp</h2>
             <hr>
@@ -16,7 +16,7 @@
 
                 <button class="btn btn-dark w-100 mt-4 mb-4" (click)="login()">LOGIN</button>
                 <ng-toast [position]="TOAST_POSITIONS.TOP_CENTER" [width]="350"></ng-toast>
-                
+
                 <div class="span text-center">
 
                     <span>Não tem conta? <a [routerLink]="['/auth/register']"
