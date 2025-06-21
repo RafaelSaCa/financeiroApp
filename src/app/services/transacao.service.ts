@@ -10,6 +10,7 @@ import { Transacao } from '../models/transacao';
 export class TransacaoService {
 
 	private apiUrl = "http://localhost:8080/transacoes";
+	// private apiUrl = "http://192.168.100.10:8080/transacoes";
 
 	constructor(private http: HttpClient) { }
 
