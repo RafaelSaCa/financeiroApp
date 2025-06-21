@@ -6,7 +6,7 @@
 
 <div class="container mt-4">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 ">
             <h2>Resumo de Lançamentos</h2>
             <hr>
         </div>
@@ -16,18 +16,18 @@
         @if ( transacoes) {
 
 
-        <div class="col-md-6 ">
+        <div class="col-md-6 order-2 order-md-2">
             <span class="ms-1">Últimos Lançamentos</span>
             <div class="card mt-2 shadow">
-                <div class="card-body " style="height: 650px">
-                    <table class="table">
+                <div class="card-body ">
+                    <table class="table table-striped table-responsive ">
 
                         <thead>
                             <tr>
-                                <th>Data</th>
-                                <th class="categoria">Categoria </th>
-                                <th>Descricação</th>
-                                <th class="valor">Valor</th>
+                                <th class="cabecalho">Data</th>
+                                <th class="cabecalho categoria">Categoria </th>
+                                <th class="cabecalho">Descricação</th>
+                                <th class="cabecalho valor">Valor</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -77,9 +77,12 @@
             </div>
 
         </div>
-        <div class="col-md-6 ">
+
+        <div class="col-md-6 order-3 order-md-3  ">
             <div class="row">
-                <div class="col-md-4">
+
+                <!--cards desktop-->
+                <div class="col-md-4 d-none d-md-block">
                     <span class="ms-1">Totais</span>
                     <div class="card mt-2 shadow h-75 ">
                         <div class="card-body">
@@ -90,7 +93,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 d-none d-md-block">
                     <span class="ms-1"></span>
                     <div class="card mt-2 shadow h-75">
                         <div class="card-body">
@@ -101,7 +104,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 d-none d-md-block">
                     <span class="ms-1"></span>
                     <div class="card mt-2 shadow h-75 ">
                         <div class="card-body">
@@ -113,11 +116,9 @@
                     </div>
                 </div>
 
-
-
                 <div class="col-md-12">
-                    <div class="card mt-2 shadow w-auto" style="height: 422px;">
-                        <div class="card-body">
+                    <div class="card mt-2 shadow w-100">
+                        <div class="card-body ">
                             <h4 class="card-title text-center mt-3">Adicionar Lançamento
                                 <i class="bi bi-plus-square-fill  ms-2  "></i>
                             </h4>
@@ -181,12 +182,33 @@
 
 
                 </div>
+
+            </div>
+        </div>
+
+        <!-- VISÍVEL SOMENTE EM MOBILE -->
+        <div class="row mt-3 d-flex d-md-none mb-3 order-1 order-md-1 ms-0">
+            <div class="col-4">
+                <div class="card text-center p-2">
+                    <h6 class="mb-1 text-black"><i class="bi bi-plus-slash-minus"></i> Resultado</h6>
+                    <strong>{{ transacoes.saldo | currency:'BRL':'symbol-narrow' }}</strong>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card text-center p-2">
+                    <h6 class="mb-1 text-danger"><i class="bi bi-dash-circle"></i> Despesas</h6>
+                    <strong>{{ transacoes.totalDespesas | currency:'BRL':'symbol-narrow' }}</strong>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card text-center p-2">
+                    <h6 class="mb-1 text-primary"><i class="bi bi-plus-circle"></i> Receitas</h6>
+                    <strong>{{ transacoes.totalReceitas | currency:'BRL':'symbol-narrow' }}</strong>
+                </div>
             </div>
         </div>
 
 
-
         }
     </div>
-
 </div>

@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 	categorias!: Categoria[];
 
 	currentPage: number = 1;
-	itemsPerPage: number = 11;
+	itemsPerPage: number = 12;
 
 	idEditar: number | null = null;
 
@@ -58,6 +58,11 @@ export class HomeComponent implements OnInit {
 			this.serviceTransacao.update(this.idEditar, this.form.value).subscribe({
 				next: () => {
 					this.toast.showSuccess('Lançamento atualizado com sucesso!', 'Deu tudo certo!');
+					this.form.reset();
+					this.form.patchValue({
+						tipo: '',
+						categoriaId: ''
+					});
 					this.idEditar = null;
 					this.listar();
 				},
@@ -77,6 +82,11 @@ export class HomeComponent implements OnInit {
 			this.serviceTransacao.create(this.form.value).subscribe({
 				next: (transacao) => {
 					this.toast.showSuccess('Lançamento adicionado com sucesso!', 'Deu tudo certo!');
+					this.form.reset();
+					this.form.patchValue({
+						tipo: '',
+						categoriaId: ''
+					});
 					this.listar();
 				},
 				error: (error) => {

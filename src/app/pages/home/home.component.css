@@ -38,3 +38,29 @@ i{
 .botao-remover{
   cursor: pointer;
  }
+
+ 
+@media (max-width: 768px) {
+    .categoria {
+        width: 5%;
+        text-align: center;
+    }
+
+    .valor {
+        width: auto;
+        text-align: end;
+    }
+
+    .cabecalho {
+        display: none;
+    }
+
+    .descricao {
+        max-width: 70px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+
+}
