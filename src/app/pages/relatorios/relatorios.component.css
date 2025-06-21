@@ -4,24 +4,55 @@
 
 }
 
-th{
+th {
     font-size: 18px;
 }
 
-td{
+td {
     font-size: 18px;
 }
 
-.categoria{
+.categoria {
     width: 280px;
-}
-
-.descricao{
     text-align: start;
 }
-.valor{
+
+.descricao {
+    text-align: start;
+}
+
+.valor {
     text-align: end;
 }
-.valores{
+
+.valores {
     height: 168px;
+}
+
+@media (max-width: 768px) {
+    .categoria {
+        width: 10%;
+        text-align: center;
+    }
+
+    .valor {
+        width: 50%;
+        text-align: end;
+    }
+
+    .cabecalho {
+        display: none;
+    }
+
+    .descricao {
+        max-width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .espaco-direita {
+        display: none;
+    }
+
 }

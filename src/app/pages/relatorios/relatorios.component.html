@@ -7,17 +7,17 @@
 
 <div class="container mt-4">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 order-1 order-md-2">
             <h2>Relatório de Lançamentos</h2>
             <hr>
         </div>
     </div>
     <div class="row">
         <!---filtro----->
-        <div class="col-md-6">
+        <div class="col-md-6 order-2 order-md-1">
 
-            <form [formGroup]="form" class="row align-items-end">
-                <h5 class="ms-1">Selecione o filtro para buscar seus lançamentos</h5>
+            <form [formGroup]="form" class="row align-items-end ">
+                <h5 class="ms-1  d-none d-md-block">Selecione o filtro para buscar seus lançamentos</h5>
 
                 <div class="col-md-6">
                     <h6 for="tipo" class="form-label ms-1 mt-3">Tipo</h6>
@@ -47,18 +47,8 @@
         </div>
 
         <!--cards------>
-        <div class="col-md-6 ">
+        <div class="col-md-6  d-none d-md-block ">
             <div class="row">
-                <!-- <div class="col-md-4">
-                    <div class="card shadow valores ">
-                        <div class="card-body align-content-center">
-                            <h5 class="card-title"><i class="bi bi-plus-slash-minus fs-5 ms-1 me-3 "></i>Saldo
-                            </h5>
-                            <h3> {{ transacoes.saldo | currency:('BRL') }}</h3>
-                        </div>
-                    </div>
-                </div> -->
-
                 <div class="col-md-6">
                     <div class="card shadow valores ">
                         <div class="card-body align-content-center text-center">
@@ -83,6 +73,22 @@
             </div>
         </div>
 
+        <!-- VISÍVEL SOMENTE EM MOBILE -->
+        <div class="row mt-3 d-flex d-md-none mb-3">
+            <div class="col-6">
+                <div class="card text-center p-2">
+                    <h6 class="mb-1 text-danger"><i class="bi bi-dash-circle"></i> Despesas</h6>
+                    <strong>{{ transacoes.totalDespesas | currency:'BRL':'symbol-narrow' }}</strong>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card text-center p-2">
+                    <h6 class="mb-1 text-primary"><i class="bi bi-plus-circle"></i> Receitas</h6>
+                    <strong>{{ transacoes.totalReceitas | currency:'BRL':'symbol-narrow' }}</strong>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!---tabela---->
@@ -92,64 +98,80 @@
             <hr>
         </div>
         <div class="card shadow">
-            <div class="card-body " style="height: 500px">
-                <table class="table">
+            <div class="card-body ">
+                <div class="table-responsive">
 
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Data</th>
-                            <th> Tipo </th>
-                            <th class="categoria">Categoria </th>
-                            <th class="descricao">Descrição</th>
-                            <th class="valor">Valor</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            *ngFor="let transacao of transacoes.transacoes | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
-                            <th></th>
-                            <td>{{ transacao.dataVencimento| date:'dd-MM-YYYY' }}</td>
 
-                            <td>{{transacao.tipo }} </td>
+                    <table class="table table-striped  ">
 
-                            <td class="categoria">
-                                <ng-container [ngSwitch]="transacao.categoria.descricao.toLowerCase()">
-                                    <span *ngSwitchCase="'alimentação'"><i class="fa-solid fa-utensils"></i></span>
-                                    <span *ngSwitchCase="'cartão de crédito'"><i
-                                            class="fa-solid fa-credit-card"></i></span>
-                                    <span *ngSwitchCase="'combustível'"><i class="fa-solid fa-gas-pump"></i></span>
-                                    <span *ngSwitchCase="'aluguel'"><i class="fa-solid fa-house-user"></i></span>
-                                    <span *ngSwitchCase="'saneamento'"><i class="fa-solid fa-faucet-drip"></i></span>
-                                    <span *ngSwitchCase="'energia elétrica'"><i
-                                            class="fa-solid fa-lightbulb"></i></span>
-                                    <span *ngSwitchCase="'recebimento de vendas'"><i
-                                            class="fa-brands fa-pix"></i></span>
-                                    <span *ngSwitchDefault></span>
-                                </ng-container>
-                                {{ transacao.categoria.descricao}}
-                            </td>
-                            <td class="descricao">{{ transacao.descricao }}</td>
+                        <thead>
+                            <tr>
+                            
+                                    <th></th>
+                                    <th class="cabecalho">Data</th>
+                                    <th class="cabecalho"> Tipo </th>
+                                    <th class=" cabecalho categoria ">Categoria </th>
+                                    <th class="cabecalho descricao">Descrição</th>
+                                    <th class="cabecalho valor">Valor</th>
+                                    <th></th>
+                           
+                        
 
-                            <td class="valor"> {{ transacao.tipo === 'RECEITA' ? '+' : '-' }} {{ transacao.valor |
-                                currency: 'BRL' }}
-                            </td>
 
-                            <td>
-                                <!-- <span class="botao-editar" (click)="editar(transacao)"><i
-                                        class="fa-solid fa-pen-to-square "></i></span>
-                                <span class="botao-remover" (click)="remover(transacao)"> <i
-                                        class="fa-solid fa-trash"></i></span> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let transacao of transacoes.transacoes | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+                                <th></th>
 
-                            </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                                <td>
+                                    <span class="d-inline d-md-none">
+                                        {{ transacao.dataVencimento | date:'dd/MM' }}
+                                    </span>
+
+                                    <span class="d-none d-md-inline">
+                                        {{ transacao.dataVencimento| date:'dd-MM-YYYY' }}
+                                    </span>
+
+                                </td>
+
+                                <td class="d-none d-md-table-cell">{{transacao.tipo }} </td>
+
+                                <td class="categoria ">
+                                    <ng-container [ngSwitch]="transacao.categoria.descricao.toLowerCase()">
+                                        <span *ngSwitchCase="'alimentação'"><i class="fa-solid fa-utensils"></i></span>
+                                        <span *ngSwitchCase="'cartão de crédito'"><i
+                                                class="fa-solid fa-credit-card"></i></span>
+                                        <span *ngSwitchCase="'combustível'"><i class="fa-solid fa-gas-pump"></i></span>
+                                        <span *ngSwitchCase="'aluguel'"><i class="fa-solid fa-house-user"></i></span>
+                                        <span *ngSwitchCase="'saneamento'"><i
+                                                class="fa-solid fa-faucet-drip"></i></span>
+                                        <span *ngSwitchCase="'energia elétrica'"><i
+                                                class="fa-solid fa-lightbulb"></i></span>
+                                        <span *ngSwitchCase="'recebimento de vendas'"><i
+                                                class="fa-brands fa-pix"></i></span>
+                                        <span *ngSwitchDefault></span>
+                                    </ng-container>
+                                    <span class="d-none d-md-inline">
+                                        {{ transacao.categoria.descricao}}
+                                    </span>
+
+                                </td>
+                                <td class="descricao">{{ transacao.descricao }}</td>
+
+                                <td class="valor">
+                                    {{ transacao.tipo === 'RECEITA' ? '+' : '-' }} {{ transacao.valor |
+                                    currency: 'BRL' }}
+                                </td>
+
+                                <td></td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="currentPage = $event"

@@ -25,7 +25,7 @@ export class RelatoriosComponent implements OnInit {
     categorias!: Categoria[];
 
     currentPage: number = 1;
-    itemsPerPage: number = 11;
+    itemsPerPage: number = 8;
 
     constructor(private serviceTransacao: TransacaoService,
         private serviceCategoria: CategoriaService,
