@@ -24,7 +24,7 @@ export class CadastrosComponent implements OnInit {
 	idEditar: number | null = null;
 
 	currentPage: number = 1;
-	itemsPerPage: number = 11;
+	itemsPerPage: number = 9;
 
 	constructor(private serviceCategoria: CategoriaService,
 		private fb: FormBuilder,
