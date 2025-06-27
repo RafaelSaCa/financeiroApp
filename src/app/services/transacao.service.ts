@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Transacoes } from '../models/transacoes';
 import { Transacao } from '../models/transacao';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class TransacaoService {
 
-	private apiUrl = "http://localhost:8080/transacoes";
-	// private apiUrl = "http://192.168.100.10:8080/transacoes";
+	// private apiUrl = "http://localhost:8080/transacoes";
+	private apiUrl = `${environment.apiUrl}/transacoes`;
+
 
 	constructor(private http: HttpClient) { }
 
