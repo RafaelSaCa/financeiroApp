@@ -31,6 +31,7 @@ Listagem, edição e exclusão de lançamentos
 Filtro por data e categoria
 
 Responsividade para uso em dispositivos móveis
+
 🧑‍💻 Autor
 Rafael Sant' Anna Carvalho
 GitHub: @RafaelSaCa
