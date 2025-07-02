@@ -32,6 +32,9 @@ Filtro por data e categoria
 
 Responsividade para uso em dispositivos móveis
 
+**NOTA 
+Como a API ainda está hospedada em um ambiente gratuito, que hiberna após inatividade o primeiro acesso pode levar de 15 a 30 segundos.
+
 🧑‍💻 Autor
 Rafael Sant' Anna Carvalho
 GitHub: @RafaelSaCa
