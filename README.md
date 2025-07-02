@@ -2,7 +2,7 @@
 Sistema completo de controle de movimentações financeiras pessoais, com frontend em Angular. O projeto permite cadastrar transações, categorias, usuários, e possui autenticação com JWT.
 
 🔗 Deploy
-Frontend: financeiroApp.onrender.com
+Frontend: financeiroapp.onrender.com
 
 🛠️ Tecnologias Utilizadas
 Angular 19
