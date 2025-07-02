@@ -5,6 +5,7 @@ Sistema completo de controle de movimentações financeiras pessoais, com fronte
 Frontend: financeiroapp.onrender.com
 
 🛠️ Tecnologias Utilizadas
+
 Angular 19
 
 Bootstrap
